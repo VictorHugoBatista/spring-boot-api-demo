@@ -2,6 +2,7 @@ package com.thinkconstructive.rest_demo.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -25,9 +26,12 @@ public class CloudVendorArrayServiceImpl implements CloudVendorService {
     }
 
     @Override
-    public String get() {
-        // TODO Auto-generated method stub
-        return null;
+    public CloudVendor get(String vendorId) {
+        return vendors
+            .stream()
+            .filter(vendor -> vendor.getVendorId().equals(vendorId))
+            .collect(Collectors.toList())
+            .get(0);
     }
 
     @Override

@@ -6,7 +6,7 @@ import com.thinkconstructive.rest_demo.model.CloudVendor;
 
 public interface CloudVendorService {
     public List<CloudVendor> getList();
-    public String get();
+    public CloudVendor get(String vendorId);
     public String create(CloudVendor cloudVendor);
     public String update();
     public String delete();
