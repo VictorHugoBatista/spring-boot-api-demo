@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.thinkconstructive.rest_demo.exceptions.CloudVendorNotExistsException;
 import com.thinkconstructive.rest_demo.model.CloudVendor;
 import com.thinkconstructive.rest_demo.service.CloudVendorService;
 
@@ -27,11 +28,15 @@ public class CloudVendorArrayServiceImpl implements CloudVendorService {
 
     @Override
     public CloudVendor get(String vendorId) {
-        return vendors
-            .stream()
-            .filter(vendor -> vendor.getVendorId().equals(vendorId))
-            .collect(Collectors.toList())
-            .get(0);
+        try {
+            return vendors
+                .stream()
+                .filter(vendor -> vendor.getVendorId().equals(vendorId))
+                .collect(Collectors.toList())
+                .get(0);
+        } catch (IndexOutOfBoundsException e) {
+            throw new CloudVendorNotExistsException("Vendor id ${vendorId} doesn't exists");
+        }
     }
 
     @Override

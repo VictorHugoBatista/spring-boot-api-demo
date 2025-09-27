@@ -38,7 +38,6 @@ public class CloudVendorAPIController
 
     @GetMapping("{vendorId}")
     public CloudVendor get(@PathVariable("vendorId") String vendorId) {
-        // return new CloudVendor(vendorId, "Vendor 1", "Address One", "xxxxx");
         return cloudVendorService.get(vendorId);
     }
     
@@ -50,7 +49,6 @@ public class CloudVendorAPIController
     @PutMapping
     public String update(@RequestBody CloudVendor cloudVendor) {
         this.cloudVendor = cloudVendor;
-
         return "success";
     }
 
