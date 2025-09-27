@@ -8,12 +8,14 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class ExceptionControllerAdvice {
     @ExceptionHandler(CloudVendorNotExistsException.class)
-    public ResponseEntity<String> handleResourceNotFoundException(CloudVendorNotExistsException ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    public ResponseEntity<CloudVendorException> handleResourceNotFoundException(CloudVendorNotExistsException ex) {
+        CloudVendorException exception = new CloudVendorException(ex.getMessage(), HttpStatus.NOT_FOUND, ex.getCause());
+        return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<String> handleGenericException(Exception ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<CloudVendorException> handleGenericException(Exception ex) {
+        CloudVendorException exception = new CloudVendorException(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, ex.getCause());
+        return new ResponseEntity<>(exception, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
