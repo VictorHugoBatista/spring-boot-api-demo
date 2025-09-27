@@ -36,7 +36,8 @@ public class CloudVendorArrayServiceImpl implements CloudVendorService {
                 .collect(Collectors.toList())
                 .get(0);
         } catch (IndexOutOfBoundsException e) {
-            throw new CloudVendorNotExistsException("Vendor id ${vendorId} doesn't exists");
+            String message = String.format("Vendor id %s doesn't exists", vendorId);
+            throw new CloudVendorNotExistsException(message);
         }
     }
 
