@@ -2,7 +2,6 @@ package com.thinkconstructive.rest_demo.controller;
 
 import java.util.List;
 
-// import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,8 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.thinkconstructive.rest_demo.model.CloudVendor;
 import com.thinkconstructive.rest_demo.service.CloudVendorService;
 
-import jakarta.websocket.server.PathParam;
-
 
 
 @RestController
@@ -26,7 +23,6 @@ public class CloudVendorAPIController
     CloudVendor cloudVendor;
     private final CloudVendorService cloudVendorService;
 
-    // @Autowired
     public CloudVendorAPIController(CloudVendorService cloudVendorService) {
         this.cloudVendorService = cloudVendorService;
     }
@@ -42,7 +38,7 @@ public class CloudVendorAPIController
     }
     
     @PostMapping
-    public String create(@RequestBody CloudVendor cloudVendor) {
+    public CloudVendor create(@RequestBody CloudVendor cloudVendor) {
         return cloudVendorService.create(cloudVendor);
     }
 
@@ -53,7 +49,7 @@ public class CloudVendorAPIController
     }
 
     @DeleteMapping("{vendorId}")
-    public String delete(@PathParam("vendorId") String vendorId) {
-        return null;
+    public CloudVendor delete(@PathVariable("vendorId") String vendorId) {
+        return cloudVendorService.delete(vendorId);
     }
 }

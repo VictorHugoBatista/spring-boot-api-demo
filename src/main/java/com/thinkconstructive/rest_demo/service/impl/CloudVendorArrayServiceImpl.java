@@ -15,15 +15,16 @@ public class CloudVendorArrayServiceImpl implements CloudVendorService {
     private ArrayList<CloudVendor> vendors = new ArrayList<CloudVendor>();
 
     @Override
-    public String create(CloudVendor cloudVendor) {
+    public CloudVendor create(CloudVendor cloudVendor) {
         vendors.add(cloudVendor);
-        return "success";
+        return cloudVendor;
     }
 
     @Override
-    public String delete() {
-        // TODO Auto-generated method stub
-        return null;
+    public CloudVendor delete(String vendorId) {
+        CloudVendor vendor = get(vendorId);
+        vendors.remove(vendor);
+        return vendor;
     }
 
     @Override
